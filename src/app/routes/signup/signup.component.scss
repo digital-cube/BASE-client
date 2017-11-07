@@ -1,0 +1,19 @@
+@import "../../../assets/scss/vars";
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.role-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.role {
+  margin: $app_margin;
+}
+
+mat-error {
+  margin-top: $app_top_margin;
+}

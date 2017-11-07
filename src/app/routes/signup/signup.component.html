@@ -1,0 +1,18 @@
+<div class="signup-form">
+  <form class="signup-form" [formGroup]="signUpForm" (ngSubmit)="signUp()">
+    <mat-form-field>
+      <input type="email" matInput [formControlName]="'username'" placeholder="username"/>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="password" matInput [formControlName]="'password'" placeholder="password"/>
+    </mat-form-field>
+    <div [formGroupName]="'data'">
+      <mat-radio-group class="role-group" [formControlName]="'role_flags'">
+        <mat-radio-button class="role" *ngFor="let r of refObjectKeys(loginRoles)" value="{{loginRoles[r]}}">{{r.toLowerCase()}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <button type="submit" class="md-raised login-btn" mat-button>Sign Up</button>
+  </form>
+  <mat-error *ngIf="apiError">{{apiError}}</mat-error>
+</div>
