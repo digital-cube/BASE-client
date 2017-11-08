@@ -26,4 +26,9 @@ describe('LoggedUserService', () => {
   it('should be created logged_user service', inject([LoggedUserService], (service: LoggedUserService) => {
     expect(service).toBeTruthy();
   }));
+  it('should set token logged_user service', inject([LoggedUserService], (service: LoggedUserService) => {
+    const _token = 'xxx';
+    service.setToken(_token);
+    expect(service.getToken()).toEqual(_token);
+  }));
 });
