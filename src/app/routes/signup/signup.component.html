@@ -12,7 +12,7 @@
         </mat-radio-button>
       </mat-radio-group>
     </div>
-    <button type="submit" class="md-raised login-btn" mat-button>Sign Up</button>
+    <button type="submit" class="md-raised login-btn" mat-button [disabled]="signUpForm.invalid">Sign Up</button>
   </form>
   <mat-error *ngIf="apiError">{{apiError}}</mat-error>
 </div>

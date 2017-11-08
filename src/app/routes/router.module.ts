@@ -8,6 +8,7 @@ import {SignupComponent} from './signup/signup.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import {RouterGuardService} from '../services/router-guard.service';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
   ],
   exports: [
     RouterModule
-  ]
+  ],
+  declarations: [ResetPasswordComponent]
 })
 export class AppRouter {}

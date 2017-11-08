@@ -23,9 +23,22 @@ app-root {
 }
 
 
-app-login, app-signup {
+app-login, app-signup, app-forgot-password {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
+}
+
+.forgot-link-wrapper {
+  text-align: right;
+  font-size: 12px;
+  margin-top: 20px;
+
+  .forgot-link {
+        color: $app_blue;
+        cursor: pointer;
+        text-decoration: none;
+  }
+
 }
