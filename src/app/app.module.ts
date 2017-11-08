@@ -2,6 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HttpModule} from '@angular/http';
 
 import {AppComponent} from './app.component';
 import {HomeComponent} from './routes/home/home.component';
@@ -13,7 +14,8 @@ import {AppMaterialModule} from './modules/app-material.module';
 import {LookupService} from './services/lookup.service';
 import {LoggedUserService} from './services/logged-user.service';
 import {ApiCallsService} from './services/api-calls.service';
-import {HttpModule} from '@angular/http';
+import {DashboardComponent} from './routes/home/dashboard/dashboard.component';
+import {RouterGuardService} from './services/router-guard.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import {HttpModule} from '@angular/http';
     HomeComponent,
     LoginComponent,
     SignupComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    DashboardComponent
 ],
   imports: [
     HttpModule,
@@ -35,7 +38,8 @@ import {HttpModule} from '@angular/http';
   providers: [
     LookupService,
     LoggedUserService,
-    ApiCallsService
+    ApiCallsService,
+    RouterGuardService
   ],
   bootstrap: [AppComponent]
 })

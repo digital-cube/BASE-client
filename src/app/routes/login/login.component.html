@@ -1,3 +1,12 @@
-<p>
-  login works!
-</p>
+<div class="login-form">
+  <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
+    <mat-form-field>
+      <input type="email" matInput [formControlName]="'username'" placeholder="username"/>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="password" matInput [formControlName]="'password'" placeholder="password"/>
+    </mat-form-field>
+    <button type="submit" class="md-raised login-btn" mat-button>Login</button>
+  </form>
+  <mat-error *ngIf="apiError">{{apiError}}</mat-error>
+</div>

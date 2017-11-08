@@ -1,13 +1,16 @@
 import { TestBed, inject } from '@angular/core/testing';
-
-import { LoggedUserService } from './logged-user.service';
 import {MockBackend} from '@angular/http/testing';
 import {BaseRequestOptions, Http, XHRBackend} from '@angular/http';
 
-describe('LoggedUserService', () => {
+import { RouterGuardService } from './router-guard.service';
+import {LoggedUserService} from './logged-user.service';
+import {RouterTestingModule} from '@angular/router/testing';
+
+describe('RouterGuardService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
+        RouterGuardService,
         LoggedUserService,
         MockBackend,
         BaseRequestOptions,
@@ -19,11 +22,14 @@ describe('LoggedUserService', () => {
               return new Http(backend, defaultOptions);
             }
         }
+      ],
+      imports: [
+        RouterTestingModule
       ]
     });
   });
 
-  it('should be created logged_user service', inject([LoggedUserService], (service: LoggedUserService) => {
+  it('should be created router-guard service', inject([RouterGuardService], (service: RouterGuardService) => {
     expect(service).toBeTruthy();
   }));
 });
