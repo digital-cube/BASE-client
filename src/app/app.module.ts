@@ -16,6 +16,7 @@ import {LoggedUserService} from './services/logged-user.service';
 import {ApiCallsService} from './services/api-calls.service';
 import {DashboardComponent} from './routes/home/dashboard/dashboard.component';
 import {RouterGuardService} from './services/router-guard.service';
+import {ResetPasswordComponent} from './routes/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {RouterGuardService} from './services/router-guard.service';
     LoginComponent,
     SignupComponent,
     ForgotPasswordComponent,
-    DashboardComponent
+    DashboardComponent,
+    ResetPasswordComponent
 ],
   imports: [
     HttpModule,

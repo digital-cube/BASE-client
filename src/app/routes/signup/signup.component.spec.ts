@@ -9,7 +9,7 @@ import {AppMaterialModule} from '../../modules/app-material.module';
 import {LookupService} from '../../services/lookup.service';
 import {ApiCallsService} from '../../services/api-calls.service';
 import {LoggedUserService} from '../../services/logged-user.service';
-import {RouterTestingModule} from "@angular/router/testing";
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('SignupComponent', () => {
   let component: SignupComponent;

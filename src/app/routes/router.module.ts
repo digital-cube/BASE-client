@@ -20,7 +20,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'sign-up', component: SignupComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
-  // {path: '**', component: HomeComponent}
+  {path: 'reset-password/:hash', component: ResetPasswordComponent},
+  {path: '**', component: HomeComponent}
 ];
 
 @NgModule({
@@ -29,7 +30,6 @@ const routes: Routes = [
   ],
   exports: [
     RouterModule
-  ],
-  declarations: [ResetPasswordComponent]
+  ]
 })
 export class AppRouter {}
