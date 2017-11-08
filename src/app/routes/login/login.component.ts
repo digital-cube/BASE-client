@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 
   userLoginError(err) {
     try {
-      const _err = err.getText();
+    const _err = err.text();
       const _body = JSON.parse(_err);
       if (_body.hasOwnProperty('message')) {
         this.apiError = _body['message'];
