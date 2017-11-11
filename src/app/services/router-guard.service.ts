@@ -23,7 +23,6 @@ export class RouterGuardService implements CanActivate, CanActivateChild {
           resolve(false);
         }
       );
-      resolve(true);
     });
   }
 
