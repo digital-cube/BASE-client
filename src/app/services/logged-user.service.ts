@@ -35,11 +35,21 @@ export class LoggedUserService {
   }
 
   login(response) {
-    this.setToken(response.token);
-    this.id = response.id;
-    this.username = response.username;
-    this.firstName = response.first_name;
-    this.lastName = response.last_name;
+    if (response.token) {
+      this.setToken(response.token);
+    }
+    if (response.id) {
+      this.id = response.id;
+    }
+    if (response.username) {
+        this.username = response.username;
+    }
+    if (response.first_name) {
+        this.firstName = response.first_name;
+    }
+    if (response.last_name) {
+        this.lastName = response.last_name;
+    }
   }
 
   setToken(token) {
