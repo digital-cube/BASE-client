@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
 
 import {ApiCallsService} from '../../services/api-calls.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-reset-password',

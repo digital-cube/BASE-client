@@ -1,31 +1,29 @@
-import { TestBed, inject } from '@angular/core/testing';
-import {BaseRequestOptions, Http, HttpModule, XHRBackend} from '@angular/http';
-import {MockBackend} from '@angular/http/testing';
+import {TestBed, inject} from '@angular/core/testing';
 
-import { ApiCallsService } from './api-calls.service';
+import {ApiCallsService} from './api-calls.service';
 import {LoggedUserService} from './logged-user.service';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 describe('ApiCallsService', () => {
+
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule
+      ],
       providers: [
         ApiCallsService,
         LoggedUserService,
-        MockBackend,
-        BaseRequestOptions,
-        {
-          provide: Http,
-          deps: [MockBackend, BaseRequestOptions],
-          useFactory:
-            (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
-              return new Http(backend, defaultOptions);
-            }
-        }
       ]
     });
   });
 
-  it('should be created api-calls service', inject([ApiCallsService], (service: ApiCallsService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should be created api-calls service', inject([HttpTestingController, ApiCallsService],
+    (http_client: HttpTestingController, service: ApiCallsService) => {
+      expect(service).toBeTruthy();
+    }));
+  it('should return api url', inject([HttpTestingController, ApiCallsService],
+    (http_client: HttpTestingController, service: ApiCallsService) => {
+      expect(service.getApiUrl('dummy_api')).toBe('dummy_api');
+    }));
 });

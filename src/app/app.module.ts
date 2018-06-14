@@ -2,7 +2,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpModule} from '@angular/http';
 
 import {AppComponent} from './app.component';
 import {HomeComponent} from './routes/home/home.component';
@@ -17,6 +16,7 @@ import {ApiCallsService} from './services/api-calls.service';
 import {DashboardComponent} from './routes/home/dashboard/dashboard.component';
 import {RouterGuardService} from './services/router-guard.service';
 import {ResetPasswordComponent} from './routes/reset-password/reset-password.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import {ResetPasswordComponent} from './routes/reset-password/reset-password.com
     ResetPasswordComponent
 ],
   imports: [
-    HttpModule,
+    HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,

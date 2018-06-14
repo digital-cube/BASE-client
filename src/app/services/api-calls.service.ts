@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import {Http, RequestOptions, Headers} from '@angular/http';
 import {LoggedUserService} from './logged-user.service';
 import {environment} from '../../environments/environment';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class ApiCallsService {
 
-  constructor(private http: Http, private logged_user: LoggedUserService) { }
+  constructor(private logged_user: LoggedUserService, private http_client: HttpClient) { }
 
   getApiUrl(_url) {
     return `${environment.api_url}${_url}`;
@@ -36,35 +36,41 @@ export class ApiCallsService {
   }
 
   _svcCall(_method, _url, _data, _token= null, load_json= true) {
-    let _options = new RequestOptions();
-    if (_method === 'GET' || _method === 'DELETE')
-      _options.search = _data;
-    if (_token)
-      _options.headers = new Headers({Authorization: _token});
-      // _options.headers = new Headers({Authorization: this.logged_user.get_token()});
+    const _options = {};
+    if (_method === 'GET' || _method === 'DELETE') {
+      _options['params'] = _data;
+    }
+    if (_token) {
+      _options['headers'] = new HttpHeaders({Authorization: _token});
+    }
 
-    if (_method === 'GET')
-      return this.http.get(this.getApiUrl(_url), _options).map(r => load_json ? r.json() : r );
+    if (_method === 'GET') {
+      return this.http_client.get(this.getApiUrl(_url), _options);
+    }
 
-    if (_method === 'PUT')
-      return this.http.put(this.getApiUrl(_url), _data, _options).map(r => load_json ? r.json() : r);
+    if (_method === 'PUT') {
+      return this.http_client.put(this.getApiUrl(_url), _data, _options);
+    }
 
-    if (_method === 'POST')
-      return this.http.post(this.getApiUrl(_url), _data, _options).map(r => load_json ? r.json() : r);
+    if (_method === 'POST') {
+      return this.http_client.post(this.getApiUrl(_url), _data, _options);
+    }
 
-    if (_method === 'PATCH')
-      return this.http.patch(this.getApiUrl(_url), _data, _options).map(r => load_json ? r.json() : r);
+    if (_method === 'PATCH') {
+      return this.http_client.patch(this.getApiUrl(_url), _data, _options);
+    }
 
-    if (_method === 'DELETE')
-      return this.http.delete(this.getApiUrl(_url), _options).map(r => load_json ? r.json() : r);
+    if (_method === 'DELETE') {
+      return this.http_client.delete(this.getApiUrl(_url), _options);
+    }
 
     return Observable.of(false);
   }
 
   postImage(img) {
-    return this.http.post(this.getApiUrl('/upl/profile-upload'), {
+    return this.http_client.post(this.getApiUrl('/upl/profile-upload'), {
       upload: img,
       token:  this.logged_user.getToken()
-    }).map(res => res.json());
+    });
   }
 }

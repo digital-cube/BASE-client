@@ -1,10 +1,9 @@
-import { TestBed, inject } from '@angular/core/testing';
-import {MockBackend} from '@angular/http/testing';
-import {BaseRequestOptions, Http, XHRBackend} from '@angular/http';
+import {TestBed, inject} from '@angular/core/testing';
 
-import { RouterGuardService } from './router-guard.service';
+import {RouterGuardService} from './router-guard.service';
 import {LoggedUserService} from './logged-user.service';
 import {RouterTestingModule} from '@angular/router/testing';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 describe('RouterGuardService', () => {
   beforeEach(() => {
@@ -12,24 +11,16 @@ describe('RouterGuardService', () => {
       providers: [
         RouterGuardService,
         LoggedUserService,
-        MockBackend,
-        BaseRequestOptions,
-        {
-          provide: Http,
-          deps: [MockBackend, BaseRequestOptions],
-          useFactory:
-            (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
-              return new Http(backend, defaultOptions);
-            }
-        }
       ],
       imports: [
+        HttpClientTestingModule,
         RouterTestingModule
       ]
     });
   });
 
-  it('should be created router-guard service', inject([RouterGuardService], (service: RouterGuardService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should be created router-guard service', inject([HttpTestingController, RouterGuardService],
+    (http_client: HttpTestingController, service: RouterGuardService) => {
+      expect(service).toBeTruthy();
+    }));
 });

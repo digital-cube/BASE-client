@@ -1,14 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {AppMaterialModule} from '../../modules/app-material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MockBackend} from '@angular/http/testing';
-import {BaseRequestOptions, Http, XHRBackend} from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { ForgotPasswordComponent } from './forgot-password.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {ApiCallsService} from '../../services/api-calls.service';
 import {LoggedUserService} from '../../services/logged-user.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('ForgotPasswordComponent', () => {
   let component: ForgotPasswordComponent;
@@ -22,21 +21,12 @@ describe('ForgotPasswordComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         RouterTestingModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        HttpClientTestingModule
       ],
       providers: [
         ApiCallsService,
         LoggedUserService,
-        MockBackend,
-        BaseRequestOptions,
-        {
-          provide: Http,
-          deps: [MockBackend, BaseRequestOptions],
-          useFactory:
-            (backend: XHRBackend, defaultOptions: BaseRequestOptions) => {
-              return new Http(backend, defaultOptions);
-            }
-        }
       ]
     })
     .compileComponents();

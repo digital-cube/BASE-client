@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {LoggedUserService} from './logged-user.service';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class RouterGuardService implements CanActivate, CanActivateChild {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
     return new Promise((resolve) => {
-      this.loggedUser.checkUser().map( r => r.json() ).subscribe(
+      this.loggedUser.checkUser().subscribe(
         r => {
           this.loggedUser.login(r);
           resolve(true);

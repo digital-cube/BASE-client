@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Http, RequestOptions, Headers} from '@angular/http';
+// import {Http, RequestOptions, Headers} from '@angular/http';
 import {environment} from '../../environments/environment';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class LoggedUserService {
@@ -12,7 +13,7 @@ export class LoggedUserService {
   firstName: string;
   lastName: string;
 
-  constructor(private http: Http) {
+  constructor(private http_client: HttpClient) {
     this.token = localStorage.getItem('token');
   }
 
@@ -58,8 +59,8 @@ export class LoggedUserService {
   }
 
   checkUser() {
-    const _header = new RequestOptions( {headers: new Headers({Authorization: this.token})} );
-    return this.http.get(environment.api_url + '/user/login', _header);
+    const _header = {headers: new HttpHeaders({Authorization: this.token})};
+    return this.http_client.get(environment.api_url + '/user/login', _header);
   }
 
 }
