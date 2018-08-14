@@ -1,0 +1,9 @@
+/*
+APPLICATION CONFIGURATION SAMPLE FILE
+Has to be as a sample file because of a variable configuration
+ */
+export const appConfig = {
+  googleApiClientID: '__YOUR_GOOGLE_APPLICATION_ID__',
+  facebookApiID: '__YOUR_FACEBOOK_APPLICATION_ID__',
+  linkedInAppID: null
+};

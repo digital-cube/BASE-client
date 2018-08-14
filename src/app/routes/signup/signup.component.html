@@ -15,4 +15,6 @@
     <button type="submit" class="md-raised login-btn" mat-button [disabled]="signUpForm.invalid">Sign Up</button>
   </form>
   <mat-error *ngIf="apiError">{{apiError}}</mat-error>
+  <button class="md-raised login-btn" mat-button (click)="authorize('google')">Sign Up With Google</button>
+  <button class="md-raised login-btn" mat-button (click)="authorize('facebook')">Sign Up With Facebook</button>
 </div>

@@ -12,4 +12,6 @@
     <a class="forgot-link" routerLink="/forgot-password">Forgot password</a>
   </div>
   <mat-error *ngIf="apiError">{{apiError}}</mat-error>
+  <button class="md-raised login-btn" mat-button (click)="authorize('google')">Login With Google</button>
+  <button class="md-raised login-btn" mat-button (click)="authorize('facebook')">Login With Facebook</button>
 </div>

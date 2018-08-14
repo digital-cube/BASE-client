@@ -4,13 +4,15 @@ import {Router} from '@angular/router';
 
 import {ApiCallsService} from '../../services/api-calls.service';
 import {LoggedUserService} from '../../services/logged-user.service';
+import {SocialAuthorization} from '../signup/signup.component';
+import {AuthService} from 'angular-6-social-login';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends SocialAuthorization implements OnInit {
 
   loginForm = new FormGroup({
     'username': new FormControl('', [Validators.required, Validators.email]),
@@ -18,13 +20,18 @@ export class LoginComponent implements OnInit {
   });
   apiError: string;
 
-  constructor(private apiSvc: ApiCallsService, private loggedUser: LoggedUserService, private router: Router) { }
+  constructor(
+    protected apiSvc: ApiCallsService,
+    private loggedUser: LoggedUserService,
+    private router: Router,
+    protected socialAuthService: AuthService) {
+    super(apiSvc, socialAuthService);
+  }
 
   ngOnInit() {
   }
 
   login() {
-    console.log('LOGIN', this.loginForm.value);
     this.apiSvc.svcPost('/user/login', this.loginForm.value).subscribe(
       this.userLoggedIn.bind(this),
       this.userLoginError.bind(this)
@@ -36,16 +43,27 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  userLoginError(err) {
+  userLoginError(response) {
     try {
-    const _err = err.text();
+    const _err = response.text();
       const _body = JSON.parse(_err);
       if (_body.hasOwnProperty('message')) {
         this.apiError = _body['message'];
       }
     } catch (err) {
       console.log('Error load login error', err);
+      console.log('Initial error', response);
     }
+  }
+
+  userAuthorized(response) {
+    /* overloaded method of SocialAuthorization*/
+    this.userLoggedIn(response);
+  }
+
+  authorizationError(response) {
+    /* overloaded method of SocialAuthorization*/
+    this.userLoginError(response);
   }
 
 }

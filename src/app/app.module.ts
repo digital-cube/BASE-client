@@ -17,6 +17,34 @@ import {DashboardComponent} from './routes/home/dashboard/dashboard.component';
 import {RouterGuardService} from './services/router-guard.service';
 import {ResetPasswordComponent} from './routes/reset-password/reset-password.component';
 import {HttpClientModule} from '@angular/common/http';
+import {appConfig} from './config/app.config';
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+  // LinkedinLoginProvider,
+} from 'angular-6-social-login';
+
+// Social Login Library Configuration
+export function getSocialAuthServiceConfigs() {
+  return new AuthServiceConfig(
+    [
+      {
+        id: FacebookLoginProvider.PROVIDER_ID,
+        provider: new FacebookLoginProvider(appConfig.facebookApiID)
+      },
+      {
+        id: GoogleLoginProvider.PROVIDER_ID,
+        provider: new GoogleLoginProvider(appConfig.googleApiClientID)
+      },
+      // {
+      //   id: LinkedinLoginProvider.PROVIDER_ID,
+      //   provider: new LinkedinLoginProvider(appConfig.linkedInAppID)
+      // }
+    ]
+  );
+}
 
 @NgModule({
   declarations: [
@@ -35,13 +63,18 @@ import {HttpClientModule} from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     AppRouter,
-    AppMaterialModule
+    AppMaterialModule,
+    SocialLoginModule
   ],
   providers: [
     LookupService,
     LoggedUserService,
     ApiCallsService,
-    RouterGuardService
+    RouterGuardService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: getSocialAuthServiceConfigs
+    }
   ],
   bootstrap: [AppComponent]
 })
