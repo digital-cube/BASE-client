@@ -2,6 +2,7 @@
 
 # custom
 app.config.ts
+package-lock.json
 
 # compiled output
 /dist
